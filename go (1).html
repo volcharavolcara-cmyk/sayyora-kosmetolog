@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sayyora Kosmetolog — Telegram</title>
+<meta name="robots" content="noindex">
+<!-- Meta Pixel ("Kosmetolog Sayt") -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1089225200560079');
+fbq('track', 'PageView');
+</script>
+<style>
+  :root { --green:#1F5E52; --green-dark:#123B33; --gold:#D8B76A; --ivory:#F7F3EC; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--ivory);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--green-dark); padding: 24px 16px; }
+  .card { width: 100%; max-width: 380px; background: #fff; border-radius: 24px; padding: 30px 22px; text-align: center; box-shadow: 0 10px 30px rgba(18,59,51,.10); }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .logo em { font-style: normal; color: var(--green); font-weight: 600; }
+  .tag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 800; letter-spacing: .12em; background: var(--gold); color: var(--green-dark); padding: 4px 10px; border-radius: 100px; }
+  h1 { font-size: 19px; margin: 18px 0 6px; }
+  p { font-size: 14px; color: #5c7570; margin: 0 0 20px; line-height: 1.45; }
+  .spin { width: 34px; height: 34px; margin: 6px auto 16px; border-radius: 50%; border: 3px solid #E4EFEC; border-top-color: var(--green); animation: r .8s linear infinite; }
+  @keyframes r { to { transform: rotate(360deg); } }
+  .btn { display: block; text-decoration: none; background: #2AABEE; color: #fff; font-weight: 700; font-size: 16px; padding: 15px; border-radius: 14px; }
+  .small { margin-top: 14px; font-size: 12px; color: #8a9a97; }
+  .small a { color: var(--green); font-weight: 600; text-decoration: none; }
+</style>
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1089225200560079&ev=PageView&noscript=1"></noscript>
+<div class="card">
+  <div class="logo">Sayyora <em>Kosmetolog</em></div>
+  <div class="tag" id="tag">LAZER EPILYATSIYA</div>
+  <div class="spin" id="spin" style="margin-top:22px"></div>
+  <h1>Telegram ochilmoqda…</h1>
+  <p>Botimizda qulay kun va vaqtni 1 daqiqada o'zingiz tanlaysiz.</p>
+  <a class="btn" id="go" href="https://t.me/kavsar_clinic_bot?start=ad_cosmo_laser">Telegram'da ochish</a>
+  <div class="small">Telegram yo'qmi? <a href="tel:+998916695445">+998 91 669 54 45</a></div>
+</div>
+<script>
+  // Reklama → shu sahifa (Pixel ko'radi) → botga tokenli havola. Mijoz botda raqam berganda server Meta'ga "Lead" yuboradi.
+  var API = 'https://kavsar-ai-crm.onrender.com';
+  var q = new URLSearchParams(location.search);
+  var offer = (q.get('offer') || 'cosmo_laser').replace(/[^a-z0-9_]/g, '');
+  var TAGS = { cosmo_laser: 'LAZER EPILYATSIYA', cosmo_face: 'YUZ CHISTKASI', cosmo_other: 'KOSMETOLOGIYA', cosmo_visit: 'KOSMETOLOG MASLAHATI' };
+  document.getElementById('tag').textContent = TAGS[offer] || 'SAYYORA KOSMETOLOG';
+  var fallback = 'https://t.me/kavsar_clinic_bot?start=ad_' + offer;
+  var btn = document.getElementById('go');
+  btn.href = fallback;
+  try { fbq('track', 'ViewContent', { content_name: offer, content_category: 'kosmetologiya' }); } catch (e) {}
+
+  function cookie(n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; }
+  var fbclid = q.get('fbclid');
+  var fbc = cookie('_fbc') || (fbclid ? 'fb.1.' + Date.now() + '.' + fbclid : '');
+  var utm = ['utm_source', 'utm_campaign', 'utm_content'].map(function (k) { return q.get(k); }).filter(Boolean);
+  if (fbclid) utm.push('fb');
+
+  var done = false;
+  function go(url) {
+    if (done) return; done = true;
+    btn.href = url;
+    try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {}
+    setTimeout(function () { location.href = url; }, 350); // Pixel voqealari yuborilib ulgurishi uchun
+    setTimeout(function () { document.getElementById('spin').style.display = 'none'; }, 2500);
+  }
+  btn.addEventListener('click', function () { try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {} });
+
+  // fbp cookie Pixel yuklangach paydo bo'ladi — biroz kutamiz (maks. 2,5 soniya, keyin baribir ochamiz)
+  setTimeout(function () {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var t = setTimeout(function () { if (ctrl) ctrl.abort(); go(fallback); }, 2500);
+    fetch(API + '/api/ad-click', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl ? ctrl.signal : undefined,
+      body: JSON.stringify({ offer: offer, utm: utm.join(' / ').slice(0, 200), fbc: fbc, fbp: cookie('_fbp'), pageUrl: location.href }),
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      clearTimeout(t); go(d && d.url ? d.url : fallback);
+    }).catch(function () { clearTimeout(t); go(fallback); });
+  }, 600);
+</script>
+</body>
+</html>
