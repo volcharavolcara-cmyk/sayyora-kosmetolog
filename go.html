@@ -62,27 +62,43 @@ fbq('track', 'PageView');
   var utm = ['utm_source', 'utm_campaign', 'utm_content'].map(function (k) { return q.get(k); }).filter(Boolean);
   if (fbclid) utm.push('fb');
 
+  // Tezlik: token shu yerda yaratiladi va mijoz DARHOL botga o'tadi; serverga yozish fonda ketadi (kutilmaydi).
+  function rnd12() {
+    var h = '';
+    try { var a = new Uint8Array(6); (window.crypto || window.msCrypto).getRandomValues(a); for (var i = 0; i < 6; i++) h += ('0' + a[i].toString(16)).slice(-2); }
+    catch (e) { for (var k = 0; k < 12; k++) h += Math.floor(Math.random() * 16).toString(16); }
+    return h;
+  }
+  var token = rnd12();
+  var target = 'https://t.me/kavsar_clinic_bot?start=ad' + token;
+  btn.href = target;
+
+  var registered = false;
+  function register() {
+    if (registered) return; registered = true;
+    try {
+      fetch(API + '/api/ad-click', {
+        method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token, offer: offer, utm: utm.join(' / ').slice(0, 200), fbc: fbc, fbp: cookie('_fbp'), pageUrl: location.href }),
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
   var done = false;
-  function go(url) {
+  function go() {
     if (done) return; done = true;
-    btn.href = url;
+    register();
     try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {}
-    setTimeout(function () { location.href = url; }, 350); // Pixel voqealari yuborilib ulgurishi uchun
+    setTimeout(function () { location.href = target; }, 150); // Pixel voqealari yuborilib ulgurishi uchun
     setTimeout(function () { document.getElementById('spin').style.display = 'none'; }, 2500);
   }
-  btn.addEventListener('click', function () { try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {} });
+  btn.addEventListener('click', function () { register(); try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {} });
 
-  // fbp cookie Pixel yuklangach paydo bo'ladi — biroz kutamiz (maks. 2,5 soniya, keyin baribir ochamiz)
-  setTimeout(function () {
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var t = setTimeout(function () { if (ctrl) ctrl.abort(); go(fallback); }, 2500);
-    fetch(API + '/api/ad-click', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl ? ctrl.signal : undefined,
-      body: JSON.stringify({ offer: offer, utm: utm.join(' / ').slice(0, 200), fbc: fbc, fbp: cookie('_fbp'), pageUrl: location.href }),
-    }).then(function (r) { return r.json(); }).then(function (d) {
-      clearTimeout(t); go(d && d.url ? d.url : fallback);
-    }).catch(function () { clearTimeout(t); go(fallback); });
-  }, 600);
+  // _fbp cookie Pixel yuklangach paydo bo'ladi — ko'pi bilan ~0,5 soniya kutamiz, keyin baribir ochamiz
+  var tries = 0;
+  (function wait() {
+    if (cookie('_fbp') || tries++ >= 8) go(); else setTimeout(wait, 60);
+  })();
 </script>
 </body>
 </html>
