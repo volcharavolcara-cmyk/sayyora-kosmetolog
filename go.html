@@ -18,37 +18,18 @@ fbq('track', 'PageView');
 <style>
   :root { --green:#1F5E52; --green-dark:#123B33; --gold:#D8B76A; --ivory:#F7F3EC; }
   * { box-sizing: border-box; }
-  body { margin: 0; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; background: var(--ivory);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--green-dark); padding: 18px 14px 28px; }
-  .card { width: 100%; max-width: 400px; background: #fff; border-radius: 24px; padding: 24px 20px; box-shadow: 0 10px 30px rgba(18,59,51,.10); }
-  .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; text-align: center; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--ivory);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--green-dark); padding: 24px 16px; }
+  .card { width: 100%; max-width: 380px; background: #fff; border-radius: 24px; padding: 30px 22px; text-align: center; box-shadow: 0 10px 30px rgba(18,59,51,.10); }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
   .logo em { font-style: normal; color: var(--green); font-weight: 600; }
-  .tag { display: table; margin: 10px auto 0; font-size: 11px; font-weight: 800; letter-spacing: .12em; background: var(--gold); color: var(--green-dark); padding: 4px 10px; border-radius: 100px; }
-  h1 { font-size: 22px; line-height: 1.2; margin: 16px 0 4px; text-align: center; }
-  .sub { text-align: center; font-weight: 800; color: var(--green); font-size: 16px; margin-bottom: 14px; }
-  ul { list-style: none; padding: 0; margin: 0 0 14px; }
-  li { font-size: 15px; padding: 5px 0; }
-  .price { background: var(--green-dark); color: #fff; border-radius: 14px; padding: 12px 14px; text-align: center; font-size: 15px; margin-bottom: 10px; }
-  .price b { color: var(--gold); font-size: 19px; }
-  .gift { background: #FBF3DC; border-radius: 12px; padding: 10px 12px; font-size: 13.5px; margin-bottom: 18px; line-height: 1.4; }
-  label { display: block; font-size: 13px; font-weight: 700; margin: 0 0 6px; }
-  .ph { display: flex; align-items: center; border: 2px solid #D9E6E2; border-radius: 14px; background: #fff; overflow: hidden; margin-bottom: 10px; }
-  .ph:focus-within { border-color: var(--green); }
-  .ph span { padding: 0 4px 0 14px; font-size: 18px; font-weight: 700; color: var(--green-dark); }
-  .ph input { flex: 1; border: 0; outline: 0; font-size: 18px; padding: 14px 12px 14px 4px; width: 100%; background: transparent; color: var(--green-dark); }
-  .nm { width: 100%; border: 2px solid #D9E6E2; border-radius: 14px; font-size: 16px; padding: 12px 14px; margin-bottom: 10px; outline: 0; }
-  .nm:focus { border-color: var(--green); }
-  .btn { display: block; width: 100%; text-align: center; text-decoration: none; border: 0; cursor: pointer; font-weight: 800; font-size: 17px; padding: 15px; border-radius: 14px; }
-  .btn.main { background: var(--green); color: #fff; }
-  .btn.tg { background: #2AABEE; color: #fff; }
-  .btn[disabled] { opacity: .6; }
-  .or { text-align: center; color: #8a9a97; font-size: 12.5px; margin: 12px 0; }
-  .err { color: #B3261E; font-size: 13px; margin: -2px 0 8px; display: none; }
-  .ok { display: none; text-align: center; }
-  .ok .big { font-size: 40px; }
-  .ok h2 { margin: 6px 0 4px; font-size: 20px; }
-  .ok p { color: #5c7570; font-size: 14px; line-height: 1.45; margin: 0 0 16px; }
-  .small { margin-top: 14px; font-size: 12px; color: #8a9a97; text-align: center; }
+  .tag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 800; letter-spacing: .12em; background: var(--gold); color: var(--green-dark); padding: 4px 10px; border-radius: 100px; }
+  h1 { font-size: 19px; margin: 18px 0 6px; }
+  p { font-size: 14px; color: #5c7570; margin: 0 0 20px; line-height: 1.45; }
+  .spin { width: 34px; height: 34px; margin: 6px auto 16px; border-radius: 50%; border: 3px solid #E4EFEC; border-top-color: var(--green); animation: r .8s linear infinite; }
+  @keyframes r { to { transform: rotate(360deg); } }
+  .btn { display: block; text-decoration: none; background: #2AABEE; color: #fff; font-weight: 700; font-size: 16px; padding: 15px; border-radius: 14px; }
+  .small { margin-top: 14px; font-size: 12px; color: #8a9a97; }
   .small a { color: var(--green); font-weight: 600; text-decoration: none; }
 </style>
 </head>
@@ -57,53 +38,31 @@ fbq('track', 'PageView');
 <div class="card">
   <div class="logo">Sayyora <em>Kosmetolog</em></div>
   <div class="tag" id="tag">LAZER EPILYATSIYA</div>
-
-  <div id="formBox">
-    <h1>Bizda ikki lazer bir apparatda</h1>
-    <div class="sub">DIOD + ALEKSANDRIT 💪</div>
-    <ul>
-      <li>✅ Qalin tukka ham, mayin tukka ham ishlaydi</li>
-      <li>✅ Muolaja soni kamroq</li>
-      <li>✅ Natija yaxshiroq</li>
-    </ul>
-    <div class="price">Muolaja <b>290 ming so'mdan</b> boshlab!</div>
-    <div class="gift">🎁 Yana bir yaxshi gap! Bizda 6 ta muolajadan keyin yuz chistkasi — 1 marta <b>BEPUL</b>.</div>
-
-    <label for="phone">Raqamingizni qoldiring — o'zimiz qo'ng'iroq qilamiz 👇</label>
-    <div class="ph"><span>+998</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12"></div>
-    <input class="nm" id="name" type="text" autocomplete="given-name" placeholder="Ismingiz (ixtiyoriy)" maxlength="40">
-    <div class="err" id="err">Raqamni to'liq yozing: 90 123 45 67</div>
-    <button class="btn main" id="send">📞 Qo'ng'iroq qilib bering</button>
-
-    <div class="or">yoki</div>
-    <a class="btn tg" id="go" href="https://t.me/kavsar_clinic_bot?start=ad_cosmo_laser">✈️ Telegram'da yozish</a>
-  </div>
-
-  <div class="ok" id="okBox">
-    <div class="big">✅</div>
-    <h2>Rahmat! Raqamingiz qabul qilindi</h2>
-    <p>Administratorimiz tez orada sizga qo'ng'iroq qiladi. Xohlasangiz, Telegram'da o'zingizga qulay kun va vaqtni hoziroq tanlashingiz mumkin.</p>
-    <a class="btn tg" id="tgOk" href="https://t.me/kavsar_clinic_bot?start=ad_cosmo_laser">✈️ Telegram'da vaqt tanlash</a>
-  </div>
-
-  <div class="small">Savol bormi? <a href="tel:+998916695445">+998 91 669 54 45</a></div>
+  <div class="spin" id="spin" style="margin-top:22px"></div>
+  <h1>Telegram ochilmoqda…</h1>
+  <p>Botimizda qulay kun va vaqtni 1 daqiqada o'zingiz tanlaysiz.</p>
+  <a class="btn" id="go" href="https://t.me/kavsar_clinic_bot?start=ad_cosmo_laser">Telegram'da ochish</a>
+  <div class="small">Telegram yo'qmi? <a href="tel:+998916695445">+998 91 669 54 45</a></div>
 </div>
 <script>
-  // Reklama → shu sahifa: raqam qoldirish (server lid yaratadi + Meta'ga Lead yuboradi) yoki Telegram'da yozish (tokenli havola).
+  // Reklama → shu sahifa (Pixel ko'radi) → botga tokenli havola. Mijoz botda raqam berganda server Meta'ga "Lead" yuboradi.
   var API = 'https://kavsar-ai-crm.onrender.com';
   var q = new URLSearchParams(location.search);
   var offer = (q.get('offer') || 'cosmo_laser').replace(/[^a-z0-9_]/g, '');
   var TAGS = { cosmo_laser: 'LAZER EPILYATSIYA', cosmo_face: 'YUZ CHISTKASI', cosmo_other: 'KOSMETOLOGIYA', cosmo_visit: 'KOSMETOLOG MASLAHATI' };
   document.getElementById('tag').textContent = TAGS[offer] || 'SAYYORA KOSMETOLOG';
+  var fallback = 'https://t.me/kavsar_clinic_bot?start=ad_' + offer;
+  var btn = document.getElementById('go');
+  btn.href = fallback;
   try { fbq('track', 'ViewContent', { content_name: offer, content_category: 'kosmetologiya' }); } catch (e) {}
 
   function cookie(n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; }
   var fbclid = q.get('fbclid');
-  function getFbc() { return cookie('_fbc') || (fbclid ? 'fb.1.' + Date.now() + '.' + fbclid : ''); }
+  var fbc = cookie('_fbc') || (fbclid ? 'fb.1.' + Date.now() + '.' + fbclid : '');
   var utm = ['utm_source', 'utm_campaign', 'utm_content'].map(function (k) { return q.get(k); }).filter(Boolean);
   if (fbclid) utm.push('fb');
-  var utmStr = utm.join(' / ').slice(0, 200);
 
+  // Tezlik: token shu yerda yaratiladi va mijoz DARHOL botga o'tadi; serverga yozish fonda ketadi (kutilmaydi).
   function rnd12() {
     var h = '';
     try { var a = new Uint8Array(6); (window.crypto || window.msCrypto).getRandomValues(a); for (var i = 0; i < 6; i++) h += ('0' + a[i].toString(16)).slice(-2); }
@@ -111,69 +70,35 @@ fbq('track', 'PageView');
     return h;
   }
   var token = rnd12();
-  var tgLink = 'https://t.me/kavsar_clinic_bot?start=ad' + token;
-  document.getElementById('go').href = tgLink;
-  document.getElementById('tgOk').href = tgLink;
+  var target = 'https://t.me/kavsar_clinic_bot?start=ad' + token;
+  btn.href = target;
 
-  // Bosishni serverga yozamiz (Telegram yo'li uchun kerak) — fonda, kutilmaydi
   var registered = false;
   function register() {
     if (registered) return; registered = true;
     try {
       fetch(API + '/api/ad-click', {
         method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: token, offer: offer, utm: utmStr, fbc: getFbc(), fbp: cookie('_fbp'), pageUrl: location.href }),
+        body: JSON.stringify({ token: token, offer: offer, utm: utm.join(' / ').slice(0, 200), fbc: fbc, fbp: cookie('_fbp'), pageUrl: location.href }),
       }).catch(function () {});
     } catch (e) {}
   }
-  var tries = 0;
-  (function wait() { if (cookie('_fbp') || tries++ >= 12) register(); else setTimeout(wait, 60); })();
 
-  document.getElementById('go').addEventListener('click', function () {
+  var done = false;
+  function go() {
+    if (done) return; done = true;
     register();
     try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {}
-  });
+    setTimeout(function () { location.href = target; }, 150); // Pixel voqealari yuborilib ulgurishi uchun
+    setTimeout(function () { document.getElementById('spin').style.display = 'none'; }, 2500);
+  }
+  btn.addEventListener('click', function () { register(); try { fbq('track', 'Contact', { content_name: 'telegram_bot' }); } catch (e) {} });
 
-  // Raqam kiritish: 90 123 45 67 ko'rinishiga keltiramiz
-  var phoneEl = document.getElementById('phone');
-  phoneEl.addEventListener('input', function () {
-    var d = phoneEl.value.replace(/\D/g, '');
-    if (d.indexOf('998') === 0 && d.length > 9) d = d.slice(3);
-    d = d.slice(0, 9);
-    var out = d.slice(0, 2);
-    if (d.length > 2) out += ' ' + d.slice(2, 5);
-    if (d.length > 5) out += ' ' + d.slice(5, 7);
-    if (d.length > 7) out += ' ' + d.slice(7, 9);
-    phoneEl.value = out;
-    document.getElementById('err').style.display = 'none';
-  });
-
-  var sending = false;
-  document.getElementById('send').addEventListener('click', function () {
-    if (sending) return;
-    var digits = phoneEl.value.replace(/\D/g, '');
-    if (digits.length !== 9) { document.getElementById('err').style.display = 'block'; phoneEl.focus(); return; }
-    sending = true;
-    var btn = this; btn.disabled = true; btn.textContent = 'Yuborilmoqda…';
-    var eid = 'goform_' + token;
-    var name = document.getElementById('name').value.trim() || 'Mijoz';
-    fetch(API + '/api/landing-lead', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, phone: '+998' + digits, doctorId: 1, offer: offer, utm: utmStr, adToken: token,
-        eventId: eid, fbc: getFbc(), fbp: cookie('_fbp'), pageUrl: location.href }),
-    }).then(function (r) { return r.json(); }).then(function (d) {
-      if (!d || !d.success) throw new Error('fail');
-      try { fbq('track', 'Lead', { content_name: offer, content_category: 'kosmetologiya' }, { eventID: eid }); } catch (e) {}
-      register();
-      if (d.telegramUrl) document.getElementById('tgOk').href = d.telegramUrl;
-      document.getElementById('formBox').style.display = 'none';
-      document.getElementById('okBox').style.display = 'block';
-      window.scrollTo(0, 0);
-    }).catch(function () {
-      sending = false; btn.disabled = false; btn.textContent = '📞 Qo\'ng\'iroq qilib bering';
-      var e = document.getElementById('err'); e.textContent = 'Yuborilmadi. Qayta urinib ko\'ring yoki Telegram\'da yozing.'; e.style.display = 'block';
-    });
-  });
+  // _fbp cookie Pixel yuklangach paydo bo'ladi — ko'pi bilan ~0,5 soniya kutamiz, keyin baribir ochamiz
+  var tries = 0;
+  (function wait() {
+    if (cookie('_fbp') || tries++ >= 8) go(); else setTimeout(wait, 60);
+  })();
 </script>
 </body>
 </html>
